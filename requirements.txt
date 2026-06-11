@@ -1,0 +1,8 @@
+sentence-transformers
+chromadb
+datasets
+pandas
+tqdm
+transformers
+torch
+FlagEmbedding
