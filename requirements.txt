@@ -8,3 +8,4 @@ torch
 FlagEmbedding
 chromadb
 sentence_transformers
+requests
