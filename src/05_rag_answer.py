@@ -1,26 +1,5 @@
-from sentence_transformers import SentenceTransformer
-import chromadb
+from retrieve_utils import load_embedding_model, load_collection, retrieve_chunks
 
-MODEL_NAME = "BAAI/bge-small-en-v1.5"
-
-CHUNKS_PATH = "data/chunks.csv"
-BATCH_SIZE = 64
-
-
-def load_embedding_model():
-    return SentenceTransformer(MODEL_NAME)
-
-def load_collection():
-    client = chromadb.PersistentClient(path="chroma_db")
-    return client.get_collection(name="arxiv_chunks")
-
-def retrieve_chunks(model, collection, query, k=5):
-    query_embedding = model.encode(query)
-    results = collection.query(
-        query_embeddings=[query_embedding],
-        n_results=k
-    )
-    return results
 
 def answer_question(model, collection, query, k=5):
     results = retrieve_chunks(model, collection, query, k)
